@@ -82,18 +82,18 @@ function mcwIterativeBinarySearch(Array $arr, $x) {
 }
 
 
-$test = [];
-$test[] = ["key_a" => "a"];
-$test[] = ["key_z" => "z"];
-$test[] = ["key_q" => "q"];
-$test[] = ["key_r" => "r"];
-$test[] = ["key_b" => "b"];
+// $test = [];
+// $test[] = ["key_a" => "a"];
+// $test[] = ["key_z" => "z"];
+// $test[] = ["key_q" => "q"];
+// $test[] = ["key_r" => "r"];
+// $test[] = ["key_b" => "b"];
 
-var_dump($test);
-usort($test, 'mcwKeyValValCompare');
-var_dump($test);
+// var_dump($test);
+// usort($test, 'mcwKeyValValCompare');
+// var_dump($test);
 
-$result = mcwIterativeBinaryKeySearch($test, "b");
+// $result = mcwIterativeBinaryKeySearch($test, "b");
 
-echo "result: $result\n";
+// echo "result: $result\n";
 ?>
