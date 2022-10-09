@@ -1,5 +1,10 @@
 <?php
 
+if (isset($_POST['node_request'])) {
+    print_r($_POST);
+    exit();
+}
+
 function postToNode($data, $url, $port = 80, $debug = false) {
     $payload = json_encode($data);
  
