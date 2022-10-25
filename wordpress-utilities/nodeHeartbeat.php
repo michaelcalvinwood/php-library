@@ -1,4 +1,8 @@
 <?php
+/*
+ * Add the following to functions.php
+ */
+
 function postToNode($data, $url, $port = 80, $connectionTimeout = 3, $responseTimeout = 10, $debug = false) {
   $payload = json_encode($data);
 
@@ -37,6 +41,7 @@ function run_on_all_job_status_transitions( $new_status, $old_status, $post ) {
 
   $heartbeat = postToNode($data, "https://services.pymnts.com/heartbeat", 5005);
 
+  // for debugging. Remove from production after testing.
   if ($heartbeat === false) header('heartbeat: false');
   else header('heartbeat: true');
 

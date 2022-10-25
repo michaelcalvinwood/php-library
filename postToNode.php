@@ -1,10 +1,9 @@
 <?php
 
-if (isset($_POST['node_request'])) {
-    print_r($_POST);
-    exit();
-}
+// receiving JSON POST data from node
+$_DATA = json_decode(file_get_contents("php://input"),true);
 
+// sending JSON POST data to node
 function postToNode($data, $url, $port = 80, $debug = false) {
     $payload = json_encode($data);
  
