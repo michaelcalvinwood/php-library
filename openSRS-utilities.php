@@ -3,8 +3,6 @@ ini_set('display_errors', 'On');
 error_reporting(E_ALL | E_STRICT);
 
 function openSRS_parseResponse ($result) {
-	sendAlert ($result);
-	
 	$response = trim($result);
 	
 	$response = str_replace ('{', "", $response);
@@ -44,8 +42,8 @@ function openSRS_emailAPI ($method, $input)
 	$request = $input;
 	
 	$request['credentials'] = array();
-	$request['credentials']['user'] = "mwterra";
-	$request['credentials']['password'] = 'dragonFly@33304';
+	$request['credentials']['user'] = "";
+	$request['credentials']['password'] = '';
 	
 	//print_r($request);
 
