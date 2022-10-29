@@ -1,0 +1,3 @@
+in package.json adjust the following line to match the correct domain name
+
+	"homepage": "https://yourwebsite.com/your_folder_name/",
