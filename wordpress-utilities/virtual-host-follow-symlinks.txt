@@ -1,0 +1,5 @@
+<Directory /var/www/gamma.pymnts.com/curBuild/>
+      Options FollowSymLinks
+      AllowOverride All
+      Require all granted
+  </Directory>
