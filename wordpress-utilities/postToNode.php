@@ -4,7 +4,7 @@
 $_DATA = json_decode(file_get_contents("php://input"),true);
 
 // sending JSON POST data to node
-function postToNode($data, $url, $port = 80, $debug = false) {
+function postToNode($data, $url, $debug = false) {
     $payload = json_encode($data);
  
     $ch = curl_init($url);
@@ -12,7 +12,7 @@ function postToNode($data, $url, $port = 80, $debug = false) {
     curl_setopt($ch, CURLINFO_HEADER_OUT, true);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-    curl_setopt($ch, CURLOPT_PORT, $port);
+    //curl_setopt($ch, CURLOPT_PORT, $port);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
     
