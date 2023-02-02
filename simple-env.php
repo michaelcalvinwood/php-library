@@ -4,7 +4,7 @@ $pairs = file_get_contents('.env');
 if ($pairs !== false) {
     $lines = explode("\n", $pairs);
 
-    print_r($lines);
+    //print_r($lines);
 
     $numLines = count($lines);
     for ($i = 0; $i < $numLines; ++$i) {
@@ -17,5 +17,5 @@ if ($pairs !== false) {
         $_ENV[$key] = $val;
     }
 
-    print_r($_ENV);
+    //print_r($_ENV);
 }
