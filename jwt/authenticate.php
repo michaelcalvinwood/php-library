@@ -14,11 +14,31 @@ $data = [
     'email' => $email
 ];
 
-$jwt = JWT::encode(
-    $data,
-    $_ENV['JWT_SECRET_KEY'],
-    'HS512'
-);
+/*
+    Example $expiration:
+        6 minutes
+    $expirationDate must be YYYY-MM-DD
+*/
+
+function jwtEncode($data, $expiration = '2 hours', $expirationDate = '') {
+    $issuedAt   = new DateTimeImmutable();
+    $data['iat'] = $issuedAt->getTimestamp();
+    $data['nbf'] = $issuedAt->getTimestamp();
+    if ($expirationDate) {
+        $expiration = new DateTimeImmutable($expirationDate);
+        $data['exp'] = $expiration->getTimestamp();
+    } else {
+        $data['exp'] = $issuedAt->modify('+' . $expiration)->getTimestamp();
+    }
+
+    $jwt = JWT::encode(
+        $data,
+        $_ENV['JWT_SECRET_KEY'],
+        'HS512'
+    );
+    return $jwt;
+}
+
 
 echo $jwt;
 
@@ -49,6 +69,17 @@ function retrieveJwtTokenFromHeader() {
         exit;
     }
     $token = JWT::decode($jwt, $_ENV['JWT_SECRET_KEY'], ['HS512']);
+
+    $now = new DateTimeImmutable();
+    $serverName = $_ENV['JWT_ISSUING_DOMAIN'];
+
+    if ($token->iss !== $serverName ||
+        $token->nbf > $now->getTimestamp() ||
+        $token->exp < $now->getTimestamp())
+    {
+        header('HTTP/1.1 401 Unauthorized');
+        exit;
+    }
     return $token;
 }
 
