@@ -22,3 +22,25 @@ $jwt = JWT::encode(
 
 echo $jwt;
 
+/* sending the token
+  const res = await fetch('/resource.php', {
+    headers: {
+      'Authorization': `Bearer ${store.JWT}`
+    }
+  });
+*/
+
+/* If using Apache, add the following to the virtual host file
+    RewriteEngine On
+    RewriteCond %{HTTP:Authorization} ^(.+)$
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+*/
+
+function checkHeaderForAuthorization() {
+    if (! preg_match('/Bearer\s(\S+)/', $_SERVER['HTTP_AUTHORIZATION'], $matches)) {
+        header('HTTP/1.0 400 Bad Request');
+        echo 'Token not found in request';
+        exit;
+    }
+    return $_SERVER['HTTP_AUTHORIZATION'];
+}
