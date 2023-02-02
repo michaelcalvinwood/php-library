@@ -36,7 +36,7 @@ echo $jwt;
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 */
 
-function retrieveJwtFromHeader() {
+function retrieveJwtTokenFromHeader() {
     if (! preg_match('/Bearer\s(\S+)/', $_SERVER['HTTP_AUTHORIZATION'], $matches)) {
         header('HTTP/1.0 400 Bad Request');
         echo 'Token not found in request';
@@ -48,6 +48,7 @@ function retrieveJwtFromHeader() {
         header('HTTP/1.0 400 Bad Request');
         exit;
     }
-    return $jwt;
+    $token = JWT::decode($jwt, $_ENV['JWT_SECRET_KEY'], ['HS512']);
+    return $token;
 }
 
